@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#111827;
+color:white;
+font-family:sans-serif;
+}
+
+.container{
+text-align:center;
+}
+
+/* input */
+input{
+padding:10px;
+border-radius:8px;
+border:none;
+width:200px;
+}
+
+/* button */
+button{
+padding:10px 20px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#22c55e;
+color:white;
+cursor:pointer;
+}
+
+/* toggle */
+.switch{
+position:relative;
+display:inline-block;
+width:70px;
+height:36px;
+margin-top:20px;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+background:#444;
+border-radius:50px;
+top:0;
+left:0;
+right:0;
+bottom:0;
+transition:.3s;
+}
+
+.slider:before{
+position:absolute;
+content:"";
+height:28px;
+width:28px;
+left:4px;
+bottom:4px;
+background:white;
+border-radius:50%;
+transition:.3s;
+}
+
+input:checked + .slider{
+background:#22c55e;
+}
+
+input:checked + .slider:before{
+transform:translateX(34px);
+}
+
+#toggleArea{
+display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- nhập key -->
+<div id="loginArea">
+
+<h2>Nhập Key</h2>
+
+<input id="key" placeholder="Nhập key">
+
+<br>
+
+<button onclick="verifyKey()">Xác thực</button>
+
+</div>
+
+<!-- toggle -->
+<div id="toggleArea">
+
+<label class="switch">
+<input type="checkbox" onchange="toggle(this)">
+<span class="slider"></span>
+</label>
+
+<p id="status">Trạng thái: OFF</p>
+
+</div>
+
+</div>
+
+<script>
+
+/* key hợp lệ */
+let validKeys=["VIP123","TEST999"];
+
+/* JSON script */
+let config={
+aim:true,
+speed:2,
+mode:"auto"
+};
+
+/* xác thực key */
+function verifyKey(){
+
+let key=document.getElementById("key").value;
+
+if(validKeys.includes(key)){
+
+alert("Key hợp lệ ✅");
+
+/* ẩn nhập key */
+document.getElementById("loginArea").style.display="none";
+
+/* hiện nút toggle */
+document.getElementById("toggleArea").style.display="block";
+
+}else{
+
+alert("Key không hợp lệ ❌");
+
+}
+
+}
+
+/* bật tắt */
+function toggle(el){
+
+let status=document.getElementById("status");
+
+if(el.checked){
+
+status.innerText="Trạng thái: ON";
+
+/* chạy JSON */
+console.log("JSON chạy:",config);
+
+alert("Script JSON đã bật 🚀");
+
+}else{
+
+status.innerText="Trạng thái: OFF";
+
+alert("Script đã tắt ❌");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
